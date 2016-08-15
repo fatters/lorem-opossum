@@ -1,0 +1,202 @@
+@import "https://fonts.googleapis.com/css?family=Pacifico|Scope+One";
+
+$spacing-lg: 32px;
+$spacing-md: 16px;
+
+$theme-main: #3f4a74;
+$font-default: #f4f4f4;
+$font-modal: #333;
+
+$success: #47ac3f;
+$warning: #c63535;
+
+@mixin overlay($background) {
+	background: $background;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+@mixin absolute-center($position) {
+	position: $position;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+html {
+	min-height: 100%;
+}
+
+body {
+	background: url('../img/background.jpg') center right / cover no-repeat;
+	color: $font-default;
+	font-family: 'Scope One', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	line-height: 1;
+}
+
+p {
+	margin: 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+a {
+	color: $font-default;
+
+	&:hover, &:focus {
+		color: $font-default;
+	}
+}
+
+.round-border {
+	border-radius: 15px;
+}
+
+.container {
+	@include absolute-center(absolute);
+	text-align: center;	
+	background: rgba(0, 0, 0, 0.5);
+	box-shadow: 1px 1px 4px 1px rgba(51,51,51,1);
+	padding: $spacing-lg;
+	border: 1px solid $font-default;
+	max-width: 400px;
+	z-index: 3;
+
+	&__title {
+		display: inline-block;
+		font-family: 'Pacifico', Arial, sans-serif;
+		margin-bottom: $spacing-md;
+		border-bottom: 2px dotted $font-default;
+		padding-bottom: $spacing-md;
+	}
+
+	&__btn {
+		margin-bottom: $spacing-md;
+	}
+
+	&__text {
+		font-size: 14px;
+	}
+
+	@media screen and (max-width: 767px) {
+		width: 80%;
+		max-width: auto;
+	}
+}
+
+.main-overlay {
+	@include overlay(rgba(63, 74, 116, 0.75));
+	z-index: 2;
+}
+
+.btn {
+	background: $theme-main;
+	border-radius: 4px;
+	color: $font-default;
+	font-family: 'Scope One', Arial, sans-serif;	
+	border: 1px solid $font-default;
+	padding: 6px 12px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.modal {
+	@include absolute-center(fixed);	
+	overflow: hidden;
+	color: $font-modal;
+	height: 0;
+	width: 0;
+	background: $font-default;	
+	z-index: 5;
+
+	p {
+		margin-bottom: 16px;
+	}
+
+	a {
+		color: $font-modal;
+
+		&:hover, &:focus {
+			color: $font-modal;
+		}
+	}
+
+	&__header {
+		background: $font-default;
+		border-bottom: 1px solid #3f4a74;
+		height: 64px;
+		overflow: hidden;
+		padding: $spacing-md $spacing-lg $spacing-md $spacing-lg;
+
+		&__close {
+			text-decoration: none;
+			float: right;
+			font-size: 26px;
+		}
+	}
+
+	&__body {
+		position: absolute;
+		top: 64px;
+		left: 0;
+		bottom: 0;
+		width: 100%;;
+		overflow: auto;
+
+		&__content {
+			padding: $spacing-lg;
+		}
+
+		:last-child {
+			margin-bottom: 0;
+		}		
+	}
+
+	&.active {
+		height: 500px;
+		max-height: 90%;
+		width: 600px;
+		max-width: 90%;
+		transition: all .2s linear;
+	}
+}
+
+.modal-overlay {
+	@include overlay(rgba(0, 0, 0, 0.6));	
+	display: none;
+	z-index: 4;
+
+	&.active {
+		display: block;
+	}
+}
+
+.copy-message {
+	margin-left: $spacing-md;
+	display: none;
+}
+
+.success {
+	color: $success;
+}
+
+.warning {
+	color: $warning;
+}
